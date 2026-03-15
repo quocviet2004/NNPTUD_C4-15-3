@@ -1,0 +1,15 @@
+const crypto = require('crypto');
+const fs = require('fs');
+
+// Tạo cặp key RS256 (2048 bit)
+const { publicKey, privateKey } = crypto.generateKeyPairSync('rsa', {
+  modulusLength: 2048,
+  publicKeyEncoding: { type: 'spki', format: 'pem' },
+  privateKeyEncoding: { type: 'pkcs8', format: 'pem' },
+});
+
+// Lưu ra 2 file
+fs.writeFileSync('public.pem', publicKey);
+fs.writeFileSync('private.pem', privateKey);
+
+console.log("Đã tạo thành công 2 file: public.pem và private.pem");
